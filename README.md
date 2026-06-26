@@ -111,21 +111,26 @@ for consumer hardware (including 8GB M-series Macs).
 ``` text
 recallos/
 ├── package.json
-├── vite.config.ts
-├── tailwind.config.js
-├── index.html
+├── next.config.ts
+├── tailwind.config.ts
+├── tsconfig.json
+├── public/                 # Static assets & model files
 └── src/
-    ├── style.css
-    ├── main.ts
-    ├── audio/
-    │   ├── capture.ts
-    │   └── mixer.ts
-    ├── worker/
-    │   └── transcription.worker.ts
-    ├── synthesis/
-    │   └── llm.ts
-    └── utils/
-        └── exporter.ts
+    ├── app/                # Next.js App Router (UI Layer)
+    │   ├── layout.tsx      # Root layout
+    │   ├── page.tsx        # Main Application Interface
+    │   └── globals.css     # Tailwind imports & global styles
+    ├── components/         # React UI Components
+    └── lib/                # Core Architecture Modules
+        ├── audio/          # 1. Capture Layer
+        │   ├── capture.ts
+        │   └── mixer.ts
+        ├── worker/         # 2. ASR Phase (Web Worker)
+        │   └── transcription.worker.ts
+        ├── synthesis/      # 3. LLM Phase
+        │   └── llm.ts
+        └── utils/          # 4. Export Layer
+            └── exporter.ts
 ```
 
 ------------------------------------------------------------------------

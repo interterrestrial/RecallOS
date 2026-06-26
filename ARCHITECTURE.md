@@ -56,7 +56,7 @@ graph TD
 
 ## 2. Class Diagram
 
-The following class diagram models the core modules responsible for handling different phases of the RecallOS pipeline, based on the project structure (e.g., `audio/capture.ts`, `audio/mixer.ts`, `worker/transcription.worker.ts`, `synthesis/llm.ts`, `utils/exporter.ts`).
+The following class diagram models the core modules responsible for handling different phases of the RecallOS pipeline, based on the project structure (e.g., `lib/audio/capture.ts`, `lib/audio/mixer.ts`, `lib/worker/transcription.worker.ts`, `lib/synthesis/llm.ts`, `lib/utils/exporter.ts`).
 
 ```mermaid
 classDiagram
