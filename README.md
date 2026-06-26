@@ -95,24 +95,14 @@ for consumer hardware (including 8GB M-series Macs).
 
 # 🛠️ Tech Stack
 
-  ------------------------------------------------------------------------------
-  Layer         Technology          Language            Specifications
-  ------------- ------------------- ------------------- ------------------------
-  Frontend/UI   Vite, HTML5,        TypeScript          Strict client-side
-                Tailwind CSS                            execution
-
-  Capture &     Web Audio API,      TypeScript          Multi-source capture,
-  Mixing        MediaRecorder                           16kHz mono
-
-  ASR Engine    Transformers.js,    TypeScript/WebGPU   Whisper Tiny/Base
-                ONNX Runtime Web                        
-
-  LLM Engine    WebLLM,             TypeScript/WebGPU   Llama-3.2-1B /
-                Transformers.js                         Qwen2.5-0.5B
-
-  Hosting       GitHub Pages,       N/A                 HTTPS static hosting
-                Vercel                                  
-  ------------------------------------------------------------------------------
+| Layer | Technology | Language | Specifications |
+| :--- | :--- | :--- | :--- |
+| **Frontend/UI** | Next.js (App Router), React | TypeScript | Strict client-side execution, no backend |
+| **Styling** | Tailwind CSS | CSS | N/A |
+| **Capture & Mixing** | Web Audio API, MediaRecorder | TypeScript | Multi-source capture, 16kHz mono resampling |
+| **ASR Engine** | Transformers.js / ONNX Web | TypeScript | Local whisper-tiny.en or whisper-base |
+| **LLM Engine** | WebLLM / Transformers.js | TypeScript | Local Llama-3.2-1B-Instruct or Qwen2.5-0.5B |
+| **Hosting & Deploy** | Vercel | N/A | 100% Free static web hosting (HTTPS required) |
 
 ------------------------------------------------------------------------
 
