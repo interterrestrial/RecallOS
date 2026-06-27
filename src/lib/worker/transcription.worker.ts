@@ -30,7 +30,7 @@ self.addEventListener('message', async (e: MessageEvent) => {
       // Ensure WASM files load correctly from CDN to prevent silent local 404 hangs
       env.backends.onnx.wasm.wasmPaths = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.14.0/dist/';
       
-      transcriber = await pipeline('automatic-speech-recognition', 'Xenova/whisper-base.en');
+      transcriber = await pipeline('automatic-speech-recognition', 'Xenova/whisper-small');
       console.log("[Worker] Whisper model loaded successfully");
       self.postMessage({ status: 'ready' });
     } catch (err: any) {
