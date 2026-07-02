@@ -22,10 +22,13 @@ export class LLMSynthesizer {
 Transcript:
 ${transcript}
 
-Output ONLY valid JSON with keys: "executiveSummary" (string), "decisions" (array of strings), "actionItems" (array of strings). Do not output markdown code blocks or any other text. Return pure JSON.`;
+Output ONLY valid JSON with keys: "executiveSummary" (string), "decisions" (array of strings), "actionItems" (array of strings). Do not output markdown code blocks or any other text. Return pure JSON.
+CRITICAL INSTRUCTION: Even if the transcript is very short, you MUST provide an "executiveSummary" summarizing whatever was discussed. You MUST NOT leave "executiveSummary" empty. If there are no decisions or action items, return an empty array [] for those fields.`;
 
     const reply = await this.engine.chat.completions.create({
-      messages: [{ role: 'user', content: prompt }],
+      messages: [
+        { role: 'user', content: prompt }
+      ],
       temperature: 0.2,
       max_tokens: 1024
     });
@@ -36,8 +39,12 @@ Output ONLY valid JSON with keys: "executiveSummary" (string), "decisions" (arra
     try {
       // In case the LLM returned markdown code blocks, strip them
       const cleanContent = content.replace(/^```(json)?/, '').replace(/```$/, '').trim();
-      const parsed = JSON.parse(cleanContent) as MeetingMinutes;
-      return parsed;
+      const parsed = JSON.parse(cleanContent) as Partial<MeetingMinutes>;
+      return {
+        executiveSummary: parsed.executiveSummary || "No summary generated.",
+        decisions: Array.isArray(parsed.decisions) ? parsed.decisions : [],
+        actionItems: Array.isArray(parsed.actionItems) ? parsed.actionItems : []
+      };
     } catch (e) {
       throw new Error("Failed to parse LLM response into JSON: " + content);
     }

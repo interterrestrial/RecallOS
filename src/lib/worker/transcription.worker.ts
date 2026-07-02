@@ -46,14 +46,14 @@ self.addEventListener('message', async (e: MessageEvent) => {
     
     self.postMessage({ status: 'transcribing' });
     try {
-      // audio should be a Float32Array
       const result = await transcriber(audio, {
         chunk_length_s: 30,
         stride_length_s: 5,
-        return_timestamps: true,
+        return_timestamps: false,
       });
       
-      self.postMessage({ status: 'complete', text: result.text });
+      const cleanText = result.text.trim().replace(/\s+/g, ' ');
+      self.postMessage({ status: 'complete', text: cleanText });
     } catch (err: any) {
       self.postMessage({ status: 'error', error: err.message });
     }
